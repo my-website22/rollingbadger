@@ -2,7 +2,47 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>My First Website</title>
+    <title>Контактная форма</title>
+    <style>
+        /* Стили для модального окна */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .close-btn {
+            background-color: #d4a373;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .close-btn:hover {
+            background-color: #bc8a54;
+        }
+    </style>
 
     <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -40,23 +80,44 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <h1>Свяжитесь с нами</h1>
     <p>Мы всегда рады вашим отзывам и предложениям</p>
     
-    <form id="contact-form">
-        <label for="name">Имя:</label>
-        <input type="text" id="name" name="name" required><br><br>
-        
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br><br>
-        
-        <label for="message">Сообщение:</label><br>
-        <textarea id="message" name="message" required></textarea><br><br>
-        
-        <button type="submit">Отправить</button>
-    </form>
+    <form id="contact-form"onsubmit="event.preventDefault(); showThankYouMessage();">
+    <label for="name">Имя:</label>
+    <input type="text" id="name" name="name" required><br><br>
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+    
+    <label for="message">Сообщение:</label><br>
+    <textarea id="message" name="message" required></textarea><br><br>
+    
+    <button type="submit">Отправить</button>
+</form>
 
-    <script>
-        document.getElementById("contact-form").addEventListener("submit", function() {
-            console.log("Форма отправлена!");
-        });
-    </script>
+<!-- Модальное окно -->
+<div id="thankYouModal" class="modal">
+    <div class="modal-content">
+        <h2>Спасибо!</h2>
+        <p>Мы свяжемся с вами в ближайшее время.</p>
+        <button class="close-btn" onclick="closeModal()">Хорошо</button>
+    </div>
+</div>
+
+<script>
+    function showThankYouMessage() {
+        // Показать модальное окно
+        document.getElementById("thankYouModal").style.display = "block";
+
+        // Очистить форму
+        document.getElementById("contact-form").reset();
+
+        // Отправить событие в пиксель
+        fbq('track', 'FormSubmitted');
+    }
+
+    function closeModal() {
+        // Скрыть модальное окно
+        document.getElementById("thankYouModal").style.display = "none";
+    }
+</script>
 </body>
 </html>
