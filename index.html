@@ -102,18 +102,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script>
     function showThankYouMessage() {
-        // Показать модальное окно
+        
         document.getElementById("thankYouModal").style.display = "block";
 
-        // Очистить форму
+      
         document.getElementById("contact-form").reset();
 
-        // Отправить событие в пиксель
+    
         fbq('track', 'FormSubmitted');
     }
 
     function closeModal() {
-        // Скрыть модальное окно
+      
         document.getElementById("thankYouModal").style.display = "none";
     }
 </script>
